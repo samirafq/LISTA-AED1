@@ -1,0 +1,127 @@
+Questão 1:
+
+int x, y, *p;   
+y = 0;
+p = &y;
+x = *p;
+x = 4;
+(*p)++;
+--x;
+(*p) += x;
+Explicação:
+x, y e p de início será zero e logo em seguida declara que vale 4, tecnicamente todos vão valer 4, mas o x vai ser decrementado e passar a valer 3. Enquanto y e p vão passar a valer 4.
+x= 3;
+y= 4;
+p= 4;
+
+Questão 2:
+
+int main(void) {
+int x, *p;
+x = 100;
+p = &x;
+printf(“Valor de p = %p\tValor de *p = %d”, p, *p);
+}
+Letra A:
+Erro.
+Letra B:
+Porque, faltou o & comercial e deu erro.
+Letra C:
+Não.
+Letra D:
+Acrescentra o & comercial e o programa rodou certo.
+Letra E:
+Sim.
+
+Questão 3:
+#include <stdio.h>
+int main(void) {
+ int a, b, c;
+ int *p1;
+ int *p2 = &a;
+ int *p3 = &c;
+ p1 = p2;
+ *p2 = 10;
+ b = 20;
+ int **pp;
+ pp = &p1;
+ *p3 = **pp;
+ *p2 = b + (*p1)++;
+ printf("%d\t%d\t%d\n", a, b, c);
+ return 0;
+}
+Explicação:
+p2 vai armazenar o endereço de a.
+p3 vai armazenar o endereço de c.
+p1 vai armazenar o valor de p2 e p2 é a, então p1 vai armazenar o valor de a.
+p2 agora vai armazenar 10. 
+b já está declarando que vale 20. Depois  vai trazer outro ponteiro que será **pp e pp vai armazenar o vcalor de p1 e p1 agora vale 10. Em seguida, p3 vai guardar e valer o endereço de **PP. Por ultimo, p2 vai ser igual a b mais o valort de *p1 ++ e depois vai ler a função e vai retornar com o resultado: 30, 20 e 10.
+
+
+Questão 4:
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+    void calcula_hexagono(float l, float *area, float *perimetro);
+    int main(void){
+    float area, perimetro;
+	float l;
+     printf("digite o lado hexagono: ");//solicitando o lado do hexagano
+     scanf("%f", &l);
+     calcula_hexagono(l, &area, &perimetro);//chamando a funçao
+    printf("o lado do hexagono= %f%f", area, perimetro);//vai exibir os lados do hexagano 
+     	  return 0;
+ }
+      
+       void calcula_hexagono(float l, float *area, float *perimetro){
+    
+      *area = (3*pow (l,2)*sqrt(3))/ 2;
+      *perimetro=6*l; 
+	 
+	   } 
+
+Questão 5:
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+char situacao(float p1, float p2, float p3, int f, int a, float *med); //protótipo da função
+
+int main(void){
+	float p1, p2, p3, med;
+	int f, a;
+    printf("primeira nota e: "); //solicitando a primeira nota do aluno
+    scanf("%f", &p1);
+    printf("segunda nota e: "); //solicitando a segunda nota do aluno
+    scanf("%f", &p2);
+    printf("terceira nota e: "); //solicitando a terceira nota do aluno
+    scanf("%f", &p3);
+    printf("digite a quantidade de faltas: "); //solicitando o total de faltas do aluno
+    scanf("%d", &f);
+    printf("Digite o total de aulas que aluno foi: "); //solicitando o total de aulas
+    scanf("%d", &a);
+    
+     situacao(p1, p2, p3, f, a, &med); //chamada da função no int main
+
+    printf("Notas 1,2,3=%.2f%.2f.2f\nTotal de aulas assistidas=%d\nTotal de faltas=%d\nMed=%.2f", p1,p2,p3,a,f, med); // exibindo a media, faltas e quantidade de aulas do alunos
+
+return (0);
+}
+
+char situacao(float p1, float p2, float p3, int f, int a, float *med){ 
+
+    *med=(p1+p2+p3)/3; // calculando a media do aluno
+    int um;
+    a=(100*f/a);
+
+    if(a<=25 && *med>=6){ //vendo se a media é >= 6, caso seja a situação será verdadeira
+            return'U';
+        }
+    else if(a<=25 && *med<6){ //vendo se a media é < 6, caso seja a situação será verdadeira
+            return'V';
+        }
+    else { // caso não seja nenhuma dessas vai chamar o else
+            return'A';
+        }
+}
