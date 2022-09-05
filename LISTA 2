@@ -1,0 +1,125 @@
+QUESTÃO 1º
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+	int main(void){
+	int soma, menor, maior, i, tamanho ; //declarando as variavéis 
+		printf("digite o tamanho do vetor: "); //pedindo o tamanho do vetor
+		scanf("%d", &tamanho); // lendo o tamanho
+		int *vetor=(int*) malloc(tamanho*sizeof(int)); //calculando o tamanho do vetor
+	for(i=0; i<tamanho; i++){
+			scanf("%d", &vetor[i]); //lendo o tamanho do vetor
+		}
+	for(i=0; i<tamanho; i++){ //lendo a quantidade de numeros, para depois somar
+		printf("%d\n", vetor[i]); 
+	
+	if(maior<vetor[i]){ //armazenando o maior valor do vetor
+		maior=vetor[i];
+	}
+	if(menor>vetor[i]){ //armazenando o menor valor do vetor
+		menor=vetor[i];		
+	}
+		
+	} 
+	soma= maior+menor; // somando o maior mais o menor para dar o valor de soma	
+		printf("imprima a soma do vetor: %d%d%d", maior, menor, soma); //pedindo pra imprimir a soma do vetor
+	free(vetor);	
+	return(0);	
+	}
+
+QUESTÃO 2º
+
+#include<stdio.h>
+#include<stdlib.h>
+
+
+	int main(void){
+	int quantidade, j; //declarando as variavéis 
+	float notas, media; //declarando as variavéis
+	media=0.0;
+		printf("digite a quantidade de alunos: "); //pedindo pra digitar a quantidades de alunos 
+		scanf("%d", &quantidade); // lendo a quantidade 
+		float *vetor=(float*) malloc (quantidade*sizeof(float)); //calculando a quantidade de alunios
+	for (j=0; j<quantidade; j++){
+		printf("digite a media aritmetica dos alunos: ");
+			scanf("%f", &vetor[j]); //lendo o a media dos alunos
+	for(j=0; j<quantidade; j++){ //lendo a quantidade de numeros, para depois somar
+		printf("%f\n", vetor[j]);
+		media=media+vetor[j]; // somando o valor da media com a do vetor		
+	} 
+}
+	media=media/quantidade; //dividindo a media por quantidade para receber o valor da media
+	printf("a media do aluno e=%.2f", media); //solicitando a media do aluno
+	free(vetor);//lberando memoria
+	return(0);	
+
+}
+
+Questao 3:
+#include<stdlib.h>
+#include<stdio.h>
+
+void preenche_ordenado(int n, int *s); 
+
+int main(void){
+	int i, n;
+	
+ 	printf("digite os vetores: "); // quandidade de vetores que sera digitado 
+ 		scanf("%d", &n); // lendo os valores
+ 	int*vetor=(int*)malloc(n*sizeof(int)); // usando alocação dinamica para alocar os valores 
+ 		if(vetor==NULL){ //verificação de memoria do programa
+ 			printf("sem memoria!!");
+ 		exit(1); // serve para finalizar o programa
+	 }
+	
+		for(i=0;i<n;i++){ //usando o laço de repetição
+			printf("digite os numeros: "); // quandidade de numeros que sera digitado 
+			scanf("%d", &vetor[i]); //recebendo o valor do vetor
+			preenche_ordenado(n, vetor); 
+		}
+		for(int l=n-1;l>=0;l--){ 
+			printf("[%d]\n", vetor[l]); //lendo o valor do vetor
+		}
+	free(vetor); //para liberar o espaço na memoria 
+	return 0;
+}
+void preenche_ordenado(int n, int *s){
+ int j, res; //declarando as variaveis 
+ for(int i=0;i<n;i++){ //usando o laço de repetição e depois somar
+ 	for( j=0;j<n;j++);
+ 	 res=s[j]; //aqui "res" vai receber "s" e o valor de "j"
+ 	if(res>s[j]){
+ 		s[i]=s[j];
+ 		s[j]=res;
+	 }
+ }
+}
+
+Questão 4:
+
+#include<stdlib.h> //declarando as minhas bibliotecas
+#include<stdio.h>
+#define macro RAND_MAX 	//declarando o rand_max 
+
+int main(void){		
+	int i;//declrando minhas variavel 		
+	double numero, *vetor;//declarando minhas variaveis
+	printf("digite o numero dos vetores: ");//pedindo para o usuario digite os vetores
+	scanf("%f", &numero);					
+	
+	vetor=(double*) malloc(numero*sizeof(double));//usando a função malloc para alocar minha função
+	
+	printf("digite o intervalo da rand = [0,%d] \n", RAND_MAX);//pedindo o intervalo com o uso do rand_max
+	
+	for(i=1; i<=10; i++){ // laço de repetição para ler
+		printf("Numero %d = %d \n", i, rand());	 
+	}
+	
+    for(i=1; i<=numero; i++){ //  laço de repetição para guardar
+        printf("Numero %d = %d \n", i, rand());     // exibindo valores
+	free(vetor);	// usando pra que possa liberar o espaço da memoria
+	return 0; //para retornar alguma coisa. 
+}
+}
