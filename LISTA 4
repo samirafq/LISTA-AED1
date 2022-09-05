@@ -1,0 +1,217 @@
+questão 1 
+
+#include<stdio.h>
+#include<stdlib.h>
+
+//letra a
+  typedef struct Ingresso{
+	float preco;//declaração de variavel
+	char local[10];//declaração de variavel
+	char atracao[10];//declaração de variavel
+	
+	}Ingresso;
+	
+	void preenche(Ingresso* i);
+	void imprime(Ingresso* i);
+	void altera_preco(Ingresso* i, float valor);
+	void imprime_menor_maior_preco(int n, Ingresso* vet);
+	
+	//letra e	
+	int main (void){
+		
+		Ingresso *i;
+		i=(Ingresso*)malloc(sizeof(Ingresso));
+		preenche(i);
+		imprime(i);
+		free(i);
+		return 0;	
+	}
+	
+	void preenche(Ingresso* i){
+		
+	printf("\n digite o endereco:\n ");
+		scanf(" %[^\n]", &i->local);
+	printf("\n digite a atracao:\n ");
+		scanf(" %[^\n]", &i->atracao);
+		printf("\n digite o preco do ingresso:\n ");
+		scanf("%f", &i->preco);
+}	
+//letra b
+	void imprime(Ingresso* i){
+	printf("digite o preco do ingresso: %f\n", i->preco);
+	printf("digite o endereco: %s\n", i->local);
+	printf("digite a atracao: %s\n", i->atracao);
+	 
+	}
+//letra c
+ 	void altera_preco(Ingresso* i, float valor){
+ 	i->preco=valor;
+ }
+//letra d
+ 	void imprime_menor_maior_preco(int n, Ingresso* vet){
+ 		int menor=0, maior=0, i;
+		 for(i=0; i<n; i++);
+		 if(menor>vet [i].preco){ 
+		 menor=vet [i].preco; 
+		 }
+		 if(maior<vet [i].preco){
+		 maior=vet [i].preco;
+	printf("digite o maior e o menor preco %d, %d", menor, maior);
+	}
+}
+
+
+questão 2 
+#include <stdio.h> //declaração de todas as bibliotecas que vai ser utilizadas 
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX 5 //definindo meu define como max 5 e fixando ele
+typedef struct aluno{ //comecando minha funçao com typedef e nomeando como aluno
+    int matricula; //declaração de variaveis 
+    char nome[81];//declaração de variaveis
+    char turma;//declaração de variaveis
+    float nota[3];//declaração de variaveis
+    float media;//declaração de variaveis
+}Aluno;
+
+void inicializa(Aluno **alunos, int n){ //meu prototipo da função 
+	int i; //declarando variavel do tipo inteiro
+	for(i=0; i<n; i++)
+		alunos[i] = NULL; 
+}
+
+void matricula(int n, Aluno** alunos){//meu prototipo da função 
+    static int i = 0;
+    if(i<n){ //chamando o if para poder verificar 
+                alunos[i] = (Aluno*) malloc(n*sizeof(Aluno));
+                if(alunos[i]==NULL){
+                        printf("Memoria cheia \n");
+                        exit(1);
+                }
+                else{
+                    printf("Insira a matricula: \n Insira a turma: \n Insira o nome: \n"); //pedindo para o usuario digitir seus dados da turma
+                    scanf(" %d ", &alunos[i]->matricula); //lendo os dados usando ponteiro
+                    scanf(" %c", &alunos[i]->turma);
+                    scanf(" %80[^\n]", alunos[i]->nome);
+                    alunos[i]->nota[0]=0; 
+                    alunos[i]->nota[1]=0;
+                    alunos[i]->nota[2]=0;
+                    alunos[i]->media=0;
+                    i++;
+                }
+            }
+
+    else
+    {
+      printf("Nao ha vagas"); //chamada do printf para saber se ainda tem vagas, caso as de cima não tiverem sido verdaderas
+    }
+
+}
+
+void lanca_notas(int n, Aluno** alunos){//meu prototipo da função 
+    int i; //declaração de variavel
+    for(i=0;i<n;i++){
+            if(alunos[i]!=NULL){
+                printf("Aluno %d", i+1);
+                    printf("\n Digite as nota:\n");
+                    scanf("%f %f %f", &alunos[i]->nota[0], &alunos[i]->nota[1], &alunos[i]->nota[2]);
+                    alunos[i]->media=(alunos[i]->nota[0] + alunos[i]->nota[1] + alunos[i]->nota[2])/3;
+                    printf("Media: %.2f \n", alunos[i]->media);
+               }
+    }
+}
+
+void imprime_tudo(int n, Aluno** alunos){//meu prototipo da função 
+    int i; //declaração de variavel
+    for(i=0; i<n; i++){ //laço de repetição para somar 
+            if(alunos[i]!=NULL){
+                printf("\n Matricula:  %d \n", alunos[i]->matricula );//solicitando que o usuario digite sua matricula
+                printf("Nome: %s \n", alunos[i]->nome);//solicitando que o usuario digite seu nome
+                printf("Turma: %c \n", alunos[i]->turma);//solicitando que o usuario digite sua turma
+                printf("Media: %f \n", alunos[i]->media);//solicitando que o usuario digite sua media
+                }
+
+    }
+}
+
+void imprime_turma(int n, Aluno** alunos, char turma){//meu prototipo da função 
+    int i;//declaração de variavel
+    for(i=0;i<n;i++){
+        if(alunos[i]!=NULL && alunos[i]->turma==turma){
+            printf("\n Matricula:  %d \n", alunos[i]->matricula );//solicitando que o usuario digite sua matricula
+            printf("Nome: %s \n", alunos[i]->nome);//solicitando que o usuario digite seu nome
+            printf("Turma: %c \n", alunos[i]->turma);//solicitando que o usuario digite sua turma
+        }
+    }
+}
+
+void imprime_turma_aprovados(int n, Aluno**alunos, char turma){//meu prototipo da função 
+    int i; //declaração de variavel
+    for(i=0;i<n;i++){
+        if(alunos[i]!=NULL && alunos[i]->turma==turma){ //verificar se a situação sera verdadeira
+           if(alunos[i]->media>=7){
+                printf("\n Matricula:  %d \n", alunos[i]->matricula);
+                printf("Nome: %s \n", alunos[i]->nome);
+                printf("Media: %f \n, APROVADO \n", alunos[i]->media);//solicitando que o usuario digite sua media e exibindo aluno aprovado
+           }
+        }
+    }
+}
+int main(void){
+    Aluno *aluno[MAX]; //Vetores de ponteiros de struct
+    inicializa(aluno,MAX); //iniciando a função com renomiação aluno, max
+    matricula(MAX,aluno);
+    lanca_notas(MAX, aluno);
+    imprime_tudo(MAX,aluno);
+    imprime_turma(MAX, aluno, 'a');
+    imprime_turma_aprovados(MAX,aluno, 'a');
+
+return 0; //para retornar algo 
+}
+
+Questão 3:
+
+#include <stdio.h>  //declaração de biblioteca
+#include <stdlib.h>
+#include <math.h>
+/*Defina estruturas para representar retângulos (dadas a base e a altura) e círculos (dado o raio) */
+
+typedef struct retangulo{ 
+    float base; //declaração de variavel
+    float altura;//declaração de variavel
+} Ret; //renominando minha struct "ret;"
+
+typedef struct circulo{
+    float raio; //declaração de variavel 
+} Circ;//renominando minha struct com "circ;"
+
+/* Dado um círculo, crie e retorne o maior retângulo circunscrito de altura h. Considere que h é menor do
+que o diâmetro do círculo*/
+
+Ret * ret_circunscrito(Circ *c, float h){ //função 
+    Ret *r= malloc(sizeof(Ret)); //função malloc para alocar ret
+    r->base = 2 * sqrt(pow(c->raio, 2) - pow(h, 2));
+    r->altura = h;
+    return r; //retornando em r
+}
+
+/* Dado um retângulo, crie e retorne o maior círculo interno ao retângulo*/
+
+Circ * circ_interno(Ret *r){ //função
+    Circ *c = malloc(sizeof(Circ)); //função malloc para alocar circ
+    c->raio = sqrt(pow(r->base, 2) + pow(r->altura, 2)) / 2;
+    return c; //retornando em c
+}
+
+
+int main(void){   
+    Circ *c = malloc(sizeof(Circ)); //função malloc para alocar circ
+    c->raio = 5;
+    Ret *r = ret_circunscrito(c, 3);
+    printf("Base: %f ", r->base); 
+    printf("Altura: %f ", r->altura);
+    free(c); //liberando memoria
+    free(r); //liberando memoria
+    return 0; //retornar algo
+}
